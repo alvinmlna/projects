@@ -64,7 +64,29 @@
   </main>
 
   <!-- Modal -->
-  <div id="site-modal"></div>
+<div class="modal-backdrop" id="modalBackdrop" role="dialog" aria-modal="true" aria-hidden="true">
+    <div class="modal" role="document" aria-label="Project details">
+      <div class="modal-top">
+        <div class="modal-title" id="modalMiniTitle">Project</div>
+        <button class="iconbtn" type="button" id="modalClose" aria-label="Close">✕</button>
+      </div>
+
+      <div class="modal-content">
+        <div class="modal-media">
+          <img id="modalImage" alt="Project image" src="" />
+        </div>
+
+        <div class="modal-info">
+          <div class="tags" id="modalTags"></div>
+          <h2 id="modalTitle">Project Title</h2>
+          <p id="modalDesc">Project description</p>
+
+          <div class="meta">
+            <div class="row">
+              <div class="label">Technologies</div>
+              <div class="value" id="modalTech">-</div>
+            </div>
+
             <div class="row">
               <div class="label">Category</div>
               <div class="value" id="modalCategory">-</div>
