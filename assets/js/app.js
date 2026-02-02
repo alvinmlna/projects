@@ -43,7 +43,6 @@ window.__initPortfolio = async  function() {
       const backdrop = document.getElementById("modalBackdrop");
       const closeBtn = document.getElementById("modalClose");
       const modalMiniTitle = document.getElementById("modalMiniTitle");
-      const modalImage = document.getElementById("modalImage");
       const modalTags  = document.getElementById("modalTags");
       const modalTitle = document.getElementById("modalTitle");
       const modalDesc  = document.getElementById("modalDesc");
@@ -97,12 +96,20 @@ window.__initPortfolio = async  function() {
 
       function openModal(p){
         modalMiniTitle.textContent = p.title;
-        modalImage.src = p.image;
-        modalImage.alt = p.title + " image";
         modalTags.innerHTML = p.tags.map(t => `<span class="tag ${t === "SQL" || t === "DRAWINGS" ? "gray" : ""}">${t}</span>`).join("");
         modalTitle.textContent = p.title;
         modalDesc.textContent = p.full;
         modalCategory.textContent = p.category;
+        
+        // stop previous video
+        const iframe = document.getElementById("modalVideo");
+        iframe.src = "";
+
+        // set youtube iframe
+        const videoId = (p.video || "").toString().trim();
+        iframe.src = videoId
+          ? `https://www.youtube.com/embed/${videoId}?rel=0&autoplay=1`
+          : "";
 
         modalTech.innerHTML = "";
         p.tech.forEach(b => {
@@ -129,6 +136,9 @@ window.__initPortfolio = async  function() {
         backdrop.classList.remove("open");
         backdrop.setAttribute("aria-hidden", "true");
         document.body.style.overflow = "";
+
+        document.getElementById("modalBackdrop").classList.remove("open");
+        document.getElementById("modalVideo").src = ""; // stops audio
       }
 
       closeBtn.addEventListener("click", closeModal);
