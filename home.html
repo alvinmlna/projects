@@ -37,6 +37,11 @@
       padding: 0 24px;
     }
 
+    #projects,
+    #home {
+      scroll-margin-top: 80px; /* must be >= header height */
+    }
+
     /* Header */
     header{
       position:sticky;
@@ -410,7 +415,7 @@
         <nav class="navlinks" aria-label="Primary Navigation">
           <a href="#home">Home</a>
           <a href="#projects">Projects</a>
-          <a href="#contact">LinkedIn</a>
+          <a target="_blank" rel="noopener noreferrer" href="https://www.linkedin.com/in/alvinmmlna/">LinkedIn</a>
         </nav>
 
         <div class="lang" title="Language toggle (UI only)">
@@ -424,10 +429,10 @@
   <main id="home">
     <section class="hero">
       <div class="container">
-        <h1>Building digital tools for modern<br/>structural engineering.</h1>
+        <h1>Building automation tools<br/>and software solutions.</h1>
         <p>
-          Specialized in Tekla Open API development, automation scripts, and
-          custom software solutions for the construction industry.
+          Specialized in Tekla Structures Open API development for structural engineering, 
+          alongside web and custom software development across industries.
         </p>
       </div>
     </section>
@@ -436,8 +441,8 @@
       <div class="container">
         <div class="section-head">
           <div>
-            <h2 class="section-title">Selected Projects</h2>
-            <p class="section-sub">Organized by focus area so visitors can quickly see what you build.</p>
+            <h2 class="section-title">Projects</h2>
+            <p class="section-sub"></p>
           </div>
 
           <div class="chips" role="tablist" aria-label="Project Category Filter">
@@ -473,35 +478,6 @@
       </div>
     </section>
 
-    <section class="section" id="about">
-      <div class="container">
-        <div class="section-head">
-          <div>
-            <h2 class="section-title">About</h2>
-            <p class="section-sub">Keep it short: who you are, what you build, and what you’re focused on.</p>
-          </div>
-        </div>
-        <p style="max-width:780px;color:var(--muted);font-size:13.5px;margin:10px 0 0;">
-          I build engineering-focused software: Tekla plug-ins, automation tools, and lightweight web apps that make
-          modeling, detailing, reporting, and integration workflows faster and more reliable.
-        </p>
-      </div>
-    </section>
-
-    <section class="section" id="contact" style="padding-bottom:70px;">
-      <div class="container">
-        <div class="section-head">
-          <div>
-            <h2 class="section-title">Contact</h2>
-            <p class="section-sub">Put your email / WhatsApp / LinkedIn here.</p>
-          </div>
-        </div>
-        <div class="actions" style="margin-top:12px;">
-          <button class="btn primary" type="button" onclick="alert('Replace with your email link.')">Email Me</button>
-          <button class="btn" type="button" onclick="alert('Replace with your portfolio PDF link.')">Download CV</button>
-        </div>
-      </div>
-    </section>
   </main>
 
   <!-- Modal -->
