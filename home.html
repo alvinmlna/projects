@@ -4,11 +4,12 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Alvin Maulana – Portfolio</title>
-  <link rel="stylesheet" href="assets/css/styles.css">
+  <link rel="stylesheet" href="assets/css/main.css">
+  <link rel="stylesheet" href="assets/css/modal.css">
 </head>
 
 <body>
-    <div id="site-header"></div>
+  <div id="site-header"></div>
 
   <main id="home">
     <section class="hero">
@@ -55,15 +56,33 @@
 
         <div class="grid" id="grid-web"></div>
 
-                <div id="site-footer"></div>
+        <hr class="divider" />
+        <div id="site-footer"></div>
       </div>
     </section>
 
   </main>
 
-    <div id="site-modal"></div>
+  <!-- Modal -->
+  <div id="site-modal"></div>
+            <div class="row">
+              <div class="label">Category</div>
+              <div class="value" id="modalCategory">-</div>
+            </div>
+            <div class="row">
+              <div class="label">Highlights</div>
+              <ul class="bullets" id="modalBullets"></ul>
+            </div>
+          </div>
 
-
+          <div class="actions">
+            <button class="btn primary" type="button" id="modalPrimaryBtn">View Case Study</button>
+            <button class="btn" type="button" id="modalSecondaryBtn">Open Demo</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <script src="assets/js/app.js"></script>
 </body>
