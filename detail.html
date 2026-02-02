@@ -1,0 +1,544 @@
+<div
+  class="export-wrapper"
+  style="
+    width: 1440px;
+    min-height: 812px;
+    position: relative;
+    font-family: var(--font-family-body);
+    background-color: var(--background);
+  "
+>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@100;200;300;400;500;600;700;800;900&family=Geist:wght@100;200;300;400;500;600;700;800;900&family=IBM+Plex+Mono:wght@100;200;300;400;500;600;700&family=IBM+Plex+Sans:wght@100;200;300;400;500;600;700&family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Nunito:wght@200;300;400;500;600;700;800;900&family=PT+Serif:wght@400;700&family=Roboto+Slab:wght@100;200;300;400;500;600;700;800;900&family=Roboto:wght@100;300;400;500;700;900&family=Shantell+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet"
+  />
+  <html>
+    <head>
+      <meta charset="UTF-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <title>Project Detail - Tekla Auto-Modeler</title>
+
+      <style id="base-styles">
+        * {
+          box-sizing: border-box;
+        }
+
+        .export-wrapper {
+          margin: 0;
+          font-family: var(--font-family-body);
+          background-color: var(--background);
+          color: var(--foreground);
+          -webkit-font-smoothing: antialiased;
+        }
+
+        a {
+          text-decoration: none;
+          color: inherit;
+        }
+      </style>
+
+      <style id="layout-styles">
+        .page-container {
+          max-width: 1200px;
+          margin: 0 auto;
+          padding: 24px 40px 80px;
+          min-height: 812px;
+          display: flex;
+          flex-direction: column;
+          gap: 32px;
+        }
+
+        .detail-header {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          border-bottom: 1px solid var(--border);
+          padding-bottom: 16px;
+        }
+
+        .detail-logo {
+          font-size: 20px;
+          font-weight: 700;
+          letter-spacing: -0.5px;
+          color: var(--foreground);
+          white-space: nowrap;
+        }
+
+        .detail-nav-links {
+          display: flex;
+          gap: 24px;
+          font-size: 14px;
+          font-weight: 500;
+          color: var(--muted-foreground);
+          white-space: nowrap;
+        }
+
+        .detail-nav-item-active {
+          color: var(--foreground);
+        }
+
+        .back-link {
+          display: inline-flex;
+          align-items: center;
+          gap: 8px;
+          font-size: 13px;
+          font-weight: 500;
+          color: var(--muted-foreground);
+          cursor: pointer;
+        }
+
+        .detail-main {
+          display: grid;
+          grid-template-columns: 3fr 2fr;
+          gap: 32px;
+          align-items: flex-start;
+        }
+
+        .detail-left,
+        .detail-right {
+          display: flex;
+          flex-direction: column;
+          gap: 24px;
+        }
+
+        .project-title {
+          font-size: 28px;
+          font-weight: 600;
+          color: var(--foreground);
+        }
+
+        .project-subtitle {
+          font-size: 14px;
+          color: var(--muted-foreground);
+          max-width: 520px;
+          line-height: 1.6;
+        }
+      </style>
+
+      <style id="media-styles">
+        .media-card {
+          background-color: var(--card);
+          border-radius: var(--radius-lg);
+          border: 1px solid var(--border);
+          padding: 16px;
+          display: flex;
+          flex-direction: column;
+          gap: 16px;
+        }
+
+        .media-label {
+          font-size: 13px;
+          font-weight: 500;
+          color: var(--muted-foreground);
+        }
+
+        .video-frame {
+          position: relative;
+          width: 100%;
+          background-color: var(--muted);
+          border-radius: var(--radius-md);
+          overflow: hidden;
+          aspect-ratio: 16 / 9;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+
+        .video-frame img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+        }
+
+        .play-overlay {
+          position: absolute;
+          width: 64px;
+          height: 64px;
+          border-radius: 50%;
+          background-color: var(--primary);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+
+        .play-overlay iconify-icon {
+          font-size: 28px;
+          color: var(--primary-foreground);
+        }
+
+        .thumbnail-row {
+          display: grid;
+          grid-template-columns: repeat(3, minmax(0, 1fr));
+          gap: 8px;
+        }
+
+        .thumbnail-item {
+          background-color: var(--muted);
+          border-radius: var(--radius-sm);
+          overflow: hidden;
+          aspect-ratio: 4 / 3;
+        }
+
+        .thumbnail-item img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+        }
+      </style>
+
+      <style id="content-styles">
+        .section-block {
+          display: flex;
+          flex-direction: column;
+          gap: 8px;
+        }
+
+        .section-heading {
+          font-size: 14px;
+          font-weight: 600;
+          letter-spacing: 0.04em;
+          text-transform: uppercase;
+          color: var(--muted-foreground);
+        }
+
+        .section-body {
+          font-size: 14px;
+          color: var(--foreground);
+          line-height: 1.7;
+        }
+
+        .section-body p {
+          margin: 0 0 8px;
+        }
+
+        .section-body p:last-child {
+          margin-bottom: 0;
+        }
+
+        .pill-row {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 8px;
+        }
+
+        .pill {
+          font-size: 13px;
+          font-weight: 500;
+          padding: 6px 10px;
+          border-radius: var(--radius-xl);
+          background-color: var(--secondary);
+          color: var(--muted-foreground);
+          white-space: nowrap;
+        }
+
+        .features-list {
+          display: flex;
+          flex-direction: column;
+          gap: 6px;
+          padding-left: 16px;
+        }
+
+        .features-list li {
+          font-size: 14px;
+          color: var(--foreground);
+          line-height: 1.5;
+        }
+
+        .meta-grid {
+          display: grid;
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+          gap: 16px;
+        }
+
+        .meta-item-label {
+          font-size: 12px;
+          font-weight: 500;
+          color: var(--muted-foreground);
+          text-transform: uppercase;
+          letter-spacing: 0.06em;
+          margin-bottom: 4px;
+        }
+
+        .meta-item-value {
+          font-size: 14px;
+          color: var(--foreground);
+        }
+
+        .primary-button {
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          padding: 10px 16px;
+          border-radius: var(--radius-md);
+          background-color: var(--primary);
+          color: var(--primary-foreground);
+          font-size: 14px;
+          font-weight: 500;
+          cursor: pointer;
+          border: none;
+          white-space: nowrap;
+        }
+
+        .button-row {
+          display: flex;
+          gap: 12px;
+          flex-wrap: wrap;
+          margin-top: 8px;
+        }
+
+        .ghost-button {
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          padding: 10px 16px;
+          border-radius: var(--radius-md);
+          background-color: transparent;
+          color: var(--muted-foreground);
+          font-size: 14px;
+          font-weight: 500;
+          cursor: pointer;
+          border: 1px solid var(--border);
+          white-space: nowrap;
+        }
+      </style>
+    </head>
+    <body>
+      <div class="page-container">
+        <header class="detail-header">
+          <div class="detail-logo">ALEXANDER DEV</div>
+          <nav class="detail-nav-links">
+            <div class="detail-nav-item-active" data-media-type="banani-button">
+              Projects
+            </div>
+            <div data-media-type="banani-button">About</div>
+            <div data-media-type="banani-button">Contact</div>
+          </nav>
+        </header>
+
+        <div class="back-link" data-media-type="banani-button">
+          <div
+            style="
+              width: 20px;
+              height: 20px;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+            "
+          >
+            <iconify-icon
+              icon="lucide:arrow-left"
+              style="font-size: 18px; color: var(--muted-foreground)"
+            ></iconify-icon>
+          </div>
+          <span>Back to all projects</span>
+        </div>
+
+        <main class="detail-main">
+          <section class="detail-left">
+            <div>
+              <div class="project-title">Tekla Auto-Modeler</div>
+              <div class="project-subtitle">
+                Automation plugin for Tekla Structures that generates repetitive
+                steel connection details and member layouts using configurable
+                rules, reducing manual modeling time by up to 40%.
+              </div>
+            </div>
+
+            <div class="media-card">
+              <div class="media-label">Demo video</div>
+              <div class="video-frame" data-media-type="banani-button">
+                <img
+                  data-aspect-ratio="16:9"
+                  data-query="screen recording of structural engineering software interface tekla minimal ui neutral colors"
+                  alt="Tekla Auto-Modeler video preview"
+                  src="https://storage.googleapis.com/banani-generated-images/generated-images/4da25f85-9f1f-4457-9097-cd36bcbd2a2a.jpg"
+                />
+                <div class="play-overlay">
+                  <iconify-icon icon="lucide:play"></iconify-icon>
+                </div>
+              </div>
+              <div class="thumbnail-row">
+                <div class="thumbnail-item">
+                  <img
+                    data-aspect-ratio="4:3"
+                    data-query="tekla structures plugin ui panel with parameters clean minimal"
+                    alt="Parameter setup screenshot"
+                    src="https://storage.googleapis.com/banani-generated-images/generated-images/4718883a-9c75-4ed2-9eff-9e2b2ddda1c4.jpg"
+                  />
+                </div>
+                <div class="thumbnail-item">
+                  <img
+                    data-aspect-ratio="4:3"
+                    data-query="3d steel structure model with connections highlighted minimal blue grey"
+                    alt="Model result screenshot"
+                    src="https://storage.googleapis.com/banani-generated-images/generated-images/8c8c7f5f-da3a-4dbd-a801-f976dec2308c.jpg"
+                  />
+                </div>
+                <div class="thumbnail-item">
+                  <img
+                    data-aspect-ratio="4:3"
+                    data-query="engineering software automation log panel showing success messages"
+                    alt="Automation run log screenshot"
+                    src="https://app.banani.co/image-fallback.png"
+                  />
+                </div>
+              </div>
+            </div>
+
+            <div class="section-block">
+              <div class="section-heading">Project overview</div>
+              <div class="section-body">
+                <p>
+                  Tekla Auto-Modeler is a custom extension built on top of the
+                  Tekla Open API. It allows engineers and detailers to define
+                  reusable connection templates and automatically apply them
+                  across large models based on rules such as member type, size,
+                  and location.
+                </p>
+                <p>
+                  The tool is designed for teams working on repetitive
+                  industrial and commercial steel projects, where consistency
+                  and speed are critical.
+                </p>
+              </div>
+            </div>
+
+            <div class="section-block">
+              <div class="section-heading">Key features</div>
+              <ul class="features-list">
+                <li>
+                  Rule-based placement of steel connections, bracings, and
+                  stiffeners directly inside Tekla Structures.
+                </li>
+                <li>
+                  Configurable templates that can be saved, shared, and
+                  versioned across projects and teams.
+                </li>
+                <li>
+                  Interactive preview of affected members before applying bulk
+                  changes.
+                </li>
+                <li>
+                  Automatic generation of basic GA and assembly drawings for
+                  updated members.
+                </li>
+                <li>
+                  Logging and reporting of all changes for QA and model
+                  auditing.
+                </li>
+              </ul>
+            </div>
+          </section>
+
+          <aside class="detail-right">
+            <div class="section-block">
+              <div class="section-heading">Technologies used</div>
+              <div class="pill-row">
+                <div class="pill">C#</div>
+                <div class="pill">.NET</div>
+                <div class="pill">Tekla Open API</div>
+                <div class="pill">WPF</div>
+                <div class="pill">MVVM</div>
+              </div>
+            </div>
+
+            <div class="section-block">
+              <div class="section-heading">Use cases</div>
+              <div class="section-body">
+                <p>
+                  Ideal for steel fabricators, detailers, and engineering teams
+                  who need to standardize repetitive modeling tasks while
+                  keeping full control of final output.
+                </p>
+                <p>
+                  Can be adapted for company-specific connection libraries,
+                  detailing standards, and QA workflows.
+                </p>
+              </div>
+            </div>
+
+            <div class="section-block">
+              <div class="section-heading">Project details</div>
+              <div class="meta-grid">
+                <div>
+                  <div class="meta-item-label">Role</div>
+                  <div class="meta-item-value">
+                    Sole developer &amp; technical designer
+                  </div>
+                </div>
+                <div>
+                  <div class="meta-item-label">Type</div>
+                  <div class="meta-item-value">
+                    Tekla Structures desktop plugin
+                  </div>
+                </div>
+                <div>
+                  <div class="meta-item-label">Status</div>
+                  <div class="meta-item-value">In production use</div>
+                </div>
+                <div>
+                  <div class="meta-item-label">Timeline</div>
+                  <div class="meta-item-value">2023 – 2024</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="section-block">
+              <div class="section-heading">Explore more</div>
+              <div class="section-body">
+                <p>
+                  Interested in similar Tekla automation or custom engineering
+                  tools? Get in touch to discuss your workflow and ideas.
+                </p>
+              </div>
+              <div class="button-row">
+                <button class="primary-button" data-media-type="banani-button">
+                  Contact about a similar tool
+                </button>
+                <button class="ghost-button" data-media-type="banani-button">
+                  View all Tekla projects
+                </button>
+              </div>
+            </div>
+          </aside>
+        </main>
+      </div>
+    </body>
+  </html>
+  <script src="https://code.iconify.design/iconify-icon/3.0.0/iconify-icon.min.js"></script>
+  <style>
+    :root {
+      --background: #ffffff;
+      --foreground: #0b1220;
+      --border: #00000014;
+      --input: #f6f8fa;
+      --primary: #2b6be6;
+      --primary-foreground: #ffffff;
+      --secondary: #f1f5f9;
+      --secondary-foreground: #0b1220;
+      --muted: #e9edf2;
+      --muted-foreground: #7a8694;
+      --success: #2fc47a;
+      --success-foreground: #0b1220;
+      --accent: #7da7ff;
+      --accent-foreground: #07203a;
+      --destructive: #e9423a;
+      --destructive-foreground: #ffffff;
+      --warning: #f6c85f;
+      --warning-foreground: #0b1220;
+      --card: #ffffff;
+      --card-foreground: #0b1220;
+      --sidebar: #f8fafc;
+      --sidebar-foreground: #0b1220;
+      --sidebar-primary: #e8f0ff;
+      --sidebar-primary-foreground: #2b6be6;
+      --radius-sm: 4px;
+      --radius-md: 6px;
+      --radius-lg: 8px;
+      --radius-xl: 12px;
+      --font-family-body: Inter;
+    }
+  </style>
+</div>

@@ -1,0 +1,778 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Alvin Maulana – Portfolio</title>
+  <style>
+    :root{
+      --bg:#ffffff;
+      --text:#0f172a;      /* slate-900 */
+      --muted:#64748b;     /* slate-500 */
+      --line:#e2e8f0;      /* slate-200 */
+      --chip:#f1f5f9;      /* slate-100 */
+      --chipText:#334155;  /* slate-700 */
+      --primary:#2563eb;   /* blue-600 */
+      --shadow: 0 10px 24px rgba(15, 23, 42, .08);
+      --shadowSoft: 0 8px 18px rgba(15, 23, 42, .06);
+      --radius: 14px;
+      --container: 1120px;
+    }
+
+    *{ box-sizing:border-box; }
+    html,body{ height:100%; }
+    body{
+      margin:0;
+      background:var(--bg);
+      color:var(--text);
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+      line-height:1.45;
+    }
+    a{ color:inherit; text-decoration:none; }
+    button{ font:inherit; }
+
+    .container{
+      max-width: var(--container);
+      margin:0 auto;
+      padding: 0 24px;
+    }
+
+    /* Header */
+    header{
+      position:sticky;
+      top:0;
+      background:rgba(255,255,255,.85);
+      backdrop-filter: blur(10px);
+      border-bottom:1px solid rgba(226,232,240,.7);
+      z-index:50;
+    }
+    .nav{
+    height:68px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:16px;
+    position: relative; /* IMPORTANT for absolute center */
+    }
+    .brand{
+      font-weight:800;
+      letter-spacing:.3px;
+    }
+    /* put links exactly in the middle of the header */
+    .navlinks{
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    display:flex;
+    align-items:center;
+    gap:22px;
+    color:var(--muted);
+    font-weight:600;
+    font-size:14px;
+    }
+
+    /* keep brand and language on top layer, so they don't get blocked */
+    .brand, .lang{
+    position: relative;
+    z-index: 1;
+    }
+    .navlinks a:hover{ color:var(--text); }
+
+    .lang{
+      display:flex;
+      align-items:center;
+      gap:6px;
+      background:var(--chip);
+      border:1px solid var(--line);
+      border-radius:999px;
+      padding:4px;
+    }
+    .lang button{
+      border:0;
+      background:transparent;
+      padding:7px 10px;
+      border-radius:999px;
+      color:var(--muted);
+      cursor:pointer;
+      font-weight:700;
+      font-size:12px;
+    }
+    .lang button.active{
+      background:var(--primary);
+      color:white;
+      box-shadow: 0 8px 18px rgba(37,99,235,.25);
+    }
+
+    /* Hero */
+    .hero{
+      padding: 64px 0 22px;
+    }
+    .hero h1{
+      margin:0 0 18px;
+      font-size: clamp(34px, 5vw, 54px);
+      line-height:1.08;
+      letter-spacing:-.6px;
+      max-width: 780px;
+    }
+    .hero p{
+      margin:0;
+      color:var(--muted);
+      max-width: 620px;
+      font-size: 15.5px;
+    }
+
+    /* Section */
+    .section{
+      padding: 40px 0 10px;
+    }
+    .section-head{
+      display:flex;
+      align-items:flex-end;
+      justify-content:space-between;
+      gap:12px;
+      margin-bottom: 10px;
+    }
+    .section-title{
+      margin:0;
+      font-size: 18px;
+      font-weight:800;
+    }
+    .section-sub{
+      margin:6px 0 0;
+      color:var(--muted);
+      font-size: 12.5px;
+    }
+    .chips{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      flex-wrap:wrap;
+      justify-content:flex-end;
+    }
+    .chip{
+      border:1px solid var(--line);
+      background:var(--chip);
+      color:var(--chipText);
+      padding:7px 12px;
+      border-radius:999px;
+      font-size:12px;
+      font-weight:800;
+      cursor:pointer;
+      transition: all .15s ease;
+    }
+    .chip.primary{
+      background: rgba(37,99,235,.12);
+      border-color: rgba(37,99,235,.35);
+      color: var(--primary);
+    }
+    .chip:hover{
+      transform: translateY(-1px);
+      box-shadow: var(--shadowSoft);
+    }
+
+    /* Cards grid */
+    .grid{
+      margin-top: 18px;
+      display:grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 18px;
+    }
+    .card{
+      border:1px solid var(--line);
+      border-radius: var(--radius);
+      overflow:hidden;
+      background:white;
+      cursor:pointer;
+      transition: transform .15s ease, box-shadow .15s ease, border-color .15s ease;
+    }
+    .card:hover{
+      transform: translateY(-2px);
+      box-shadow: var(--shadowSoft);
+      border-color: rgba(148,163,184,.65);
+    }
+    .thumb{
+      height: 190px;
+      background: linear-gradient(135deg, #eef2ff, #f8fafc);
+      position:relative;
+      overflow:hidden;
+    }
+    .thumb img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      display:block;
+      filter: saturate(1.02);
+    }
+
+    .card-body{
+      padding: 14px 14px 16px;
+    }
+    .tags{
+      display:flex;
+      gap:8px;
+      flex-wrap:wrap;
+      margin-bottom: 10px;
+    }
+    .tag{
+      font-size:10.5px;
+      font-weight:900;
+      letter-spacing:.3px;
+      color: var(--primary);
+      background: rgba(37,99,235,.10);
+      border: 1px solid rgba(37,99,235,.20);
+      padding: 4px 8px;
+      border-radius:999px;
+      text-transform: uppercase;
+    }
+    .tag.gray{
+      color:#475569;
+      background: #f1f5f9;
+      border-color: #e2e8f0;
+    }
+    .card h3{
+      margin: 0 0 6px;
+      font-size: 15px;
+      font-weight: 900;
+      letter-spacing:-.2px;
+    }
+    .card p{
+      margin:0;
+      color: var(--muted);
+      font-size: 12.8px;
+      line-height:1.45;
+    }
+
+    /* Divider + footer */
+    .divider{
+      border:0;
+      border-top:1px solid var(--line);
+      margin: 54px 0 18px;
+    }
+    footer{
+      padding: 16px 0 26px;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    /* Modal */
+    .modal-backdrop{
+      position:fixed;
+      inset:0;
+      background: rgba(2,6,23,.55);
+      display:none;
+      align-items:center;
+      justify-content:center;
+      padding: 22px;
+      z-index: 99;
+    }
+    .modal-backdrop.open{ display:flex; }
+    .modal{
+      width:min(980px, 100%);
+      background:white;
+      border-radius: 18px;
+      overflow:hidden;
+      box-shadow: var(--shadow);
+      border:1px solid rgba(226,232,240,.7);
+      transform: translateY(6px);
+      animation: pop .16s ease-out forwards;
+    }
+    @keyframes pop{
+      to{ transform: translateY(0); }
+    }
+    .modal-top{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+      padding: 14px 16px;
+      border-bottom:1px solid var(--line);
+      background: #ffffff;
+    }
+    .modal-title{
+      font-weight: 900;
+      letter-spacing:-.2px;
+      font-size: 14px;
+    }
+    .iconbtn{
+      border:1px solid var(--line);
+      background:#fff;
+      border-radius:10px;
+      padding:8px 10px;
+      cursor:pointer;
+      font-weight:900;
+      color:#334155;
+    }
+    .iconbtn:hover{ box-shadow: var(--shadowSoft); }
+
+    .modal-content{
+      display:grid;
+      grid-template-columns: 1.2fr .8fr;
+      gap:0;
+      min-height: 360px;
+    }
+    .modal-media{
+      background: #0b1220;
+      min-height: 320px;
+    }
+    .modal-media img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      display:block;
+      opacity:.98;
+    }
+    .modal-info{
+      padding: 18px 18px 18px;
+    }
+    .modal-info h2{
+      margin:0 0 10px;
+      font-size: 22px;
+      letter-spacing:-.4px;
+      line-height:1.12;
+    }
+    .modal-info p{
+      margin:0 0 14px;
+      color: var(--muted);
+      font-size: 13.5px;
+    }
+    .meta{
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+      margin-top: 12px;
+    }
+    .meta .row{
+      padding: 10px 12px;
+      border:1px solid var(--line);
+      border-radius: 12px;
+      background:#fff;
+    }
+    .label{
+      font-size: 11px;
+      color:#64748b;
+      font-weight: 800;
+      margin-bottom: 4px;
+    }
+    .value{
+      font-size: 12.8px;
+      font-weight: 800;
+      color:#0f172a;
+    }
+    .bullets{
+      margin:10px 0 0;
+      padding-left: 18px;
+      color:#475569;
+      font-size: 12.8px;
+    }
+    .actions{
+      display:flex;
+      gap:10px;
+      margin-top: 14px;
+      flex-wrap:wrap;
+    }
+    .btn{
+      border-radius: 12px;
+      padding: 10px 12px;
+      border:1px solid var(--line);
+      background:#fff;
+      font-weight: 900;
+      font-size: 12.5px;
+      cursor:pointer;
+    }
+    .btn.primary{
+      background: var(--primary);
+      color:white;
+      border-color: rgba(37,99,235,.65);
+      box-shadow: 0 12px 20px rgba(37,99,235,.22);
+    }
+
+    /* Responsive */
+    @media (max-width: 940px){
+      .grid{ grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .modal-content{ grid-template-columns: 1fr; }
+      .modal-media{ min-height: 240px; }
+    }
+    @media (max-width: 640px){
+      .navlinks{ display:none; }
+      .hero{ padding-top: 46px; }
+      .grid{ grid-template-columns: 1fr; }
+      .thumb{ height: 180px; }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <div class="container">
+      <div class="nav">
+        <div class="brand">ALVIN  PORTOFOLIO</div>
+
+        <nav class="navlinks" aria-label="Primary Navigation">
+          <a href="#home">Home</a>
+          <a href="#projects">Projects</a>
+          <a href="#contact">LinkedIn</a>
+        </nav>
+
+        <div class="lang" title="Language toggle (UI only)">
+          <button class="active" type="button">EN</button>
+          <button type="button">ID</button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main id="home">
+    <section class="hero">
+      <div class="container">
+        <h1>Building digital tools for modern<br/>structural engineering.</h1>
+        <p>
+          Specialized in Tekla Open API development, automation scripts, and
+          custom software solutions for the construction industry.
+        </p>
+      </div>
+    </section>
+
+    <section class="section" id="projects">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <h2 class="section-title">Selected Projects</h2>
+            <p class="section-sub">Organized by focus area so visitors can quickly see what you build.</p>
+          </div>
+
+          <div class="chips" role="tablist" aria-label="Project Category Filter">
+            <button class="chip primary" data-filter="all" type="button">Tekla Open API &amp; Engineering</button>
+            <button class="chip" data-filter="web" type="button">Web &amp; Application Development</button>
+          </div>
+        </div>
+
+        <!-- SECTION: Tekla -->
+        <div class="section-head" style="margin-top:18px;">
+          <div>
+            <h3 class="section-title" style="font-size:15px;">Tekla Open API &amp; Engineering Tools</h3>
+          </div>
+          <div class="section-sub" style="margin:0;">Plugins and automations built directly for structural modeling workflows.</div>
+        </div>
+
+        <div class="grid" id="grid-tekla"></div>
+
+        <!-- SECTION: Web -->
+        <div class="section-head" style="margin-top:36px;">
+          <div>
+            <h3 class="section-title" style="font-size:15px;">Web &amp; Application Development</h3>
+          </div>
+          <div class="section-sub" style="margin:0;">Supporting tools, dashboards, and utilities around your engineering stack.</div>
+        </div>
+
+        <div class="grid" id="grid-web"></div>
+
+        <hr class="divider" />
+        <footer>
+          © <span id="year"></span> Muhammad Alvin Maulana. All rights reserved.
+        </footer>
+      </div>
+    </section>
+
+    <section class="section" id="about">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <h2 class="section-title">About</h2>
+            <p class="section-sub">Keep it short: who you are, what you build, and what you’re focused on.</p>
+          </div>
+        </div>
+        <p style="max-width:780px;color:var(--muted);font-size:13.5px;margin:10px 0 0;">
+          I build engineering-focused software: Tekla plug-ins, automation tools, and lightweight web apps that make
+          modeling, detailing, reporting, and integration workflows faster and more reliable.
+        </p>
+      </div>
+    </section>
+
+    <section class="section" id="contact" style="padding-bottom:70px;">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <h2 class="section-title">Contact</h2>
+            <p class="section-sub">Put your email / WhatsApp / LinkedIn here.</p>
+          </div>
+        </div>
+        <div class="actions" style="margin-top:12px;">
+          <button class="btn primary" type="button" onclick="alert('Replace with your email link.')">Email Me</button>
+          <button class="btn" type="button" onclick="alert('Replace with your portfolio PDF link.')">Download CV</button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Modal -->
+  <div class="modal-backdrop" id="modalBackdrop" role="dialog" aria-modal="true" aria-hidden="true">
+    <div class="modal" role="document" aria-label="Project details">
+      <div class="modal-top">
+        <div class="modal-title" id="modalMiniTitle">Project</div>
+        <button class="iconbtn" type="button" id="modalClose" aria-label="Close">✕</button>
+      </div>
+
+      <div class="modal-content">
+        <div class="modal-media">
+          <img id="modalImage" alt="Project image" src="" />
+        </div>
+
+        <div class="modal-info">
+          <div class="tags" id="modalTags"></div>
+          <h2 id="modalTitle">Project Title</h2>
+          <p id="modalDesc">Project description</p>
+
+          <div class="meta">
+            <div class="row">
+              <div class="label">Technologies</div>
+              <div class="value" id="modalTech">-</div>
+            </div>
+            <div class="row">
+              <div class="label">Category</div>
+              <div class="value" id="modalCategory">-</div>
+            </div>
+            <div class="row">
+              <div class="label">Highlights</div>
+              <ul class="bullets" id="modalBullets"></ul>
+            </div>
+          </div>
+
+          <div class="actions">
+            <button class="btn primary" type="button" id="modalPrimaryBtn">View Case Study</button>
+            <button class="btn" type="button" id="modalSecondaryBtn">Open Demo</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // ✅ Edit your projects here (data-driven, easy to maintain)
+    const projects = [
+      // Tekla / Engineering
+      {
+        id: "tekla-auto-modeler",
+        group: "tekla",
+        tags: ["TEKLA API", "C#"],
+        title: "Tekla Auto-Modeler",
+        short: "Automated modeling plugin reducing repetitive tasks by 40% for steel connection details.",
+        image: "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&w=1600&q=80",
+        full: "A Tekla Open API extension that automates repetitive modeling operations and standardizes connection detailing. Designed to speed up production work and reduce manual mistakes.",
+        tech: "C#, .NET, Tekla Open API",
+        category: "Tekla Open API & Engineering",
+        bullets: [
+          "Batch-create standardized connection components",
+          "Smart rules for naming, numbering, and attributes",
+          "Report-friendly outputs for fabrication workflows"
+        ],
+        links: { primary: "#", secondary: "#" }
+      },
+      {
+        id: "bim-data-bridge",
+        group: "tekla",
+        tags: ["API", "SQL"],
+        title: "BIM Data Bridge",
+        short: "Synchronizes Tekla Structures model data with external ERP systems in real-time.",
+        image: "https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&w=1600&q=80",
+        full: "A lightweight integration layer that extracts key Tekla model data and pushes it to external systems. Useful for tracking production, material planning, and progress visibility.",
+        tech: "REST API, SQL Server, Integration Patterns",
+        category: "Tekla Open API & Engineering",
+        bullets: [
+          "Incremental sync to avoid heavy transfers",
+          "Mapping rules per project/client requirements",
+          "Audit logs and error handling for reliability"
+        ],
+        links: { primary: "#", secondary: "#" }
+      },
+      {
+        id: "rebar-detailing",
+        group: "tekla",
+        tags: ["TEKLA API", "WPF"],
+        title: "Rebar Detailing Tool",
+        short: "Custom visual interface for complex reinforcement placement and scheduling.",
+        image: "https://images.unsplash.com/photo-1521790797524-b2497295b8a0?auto=format&fit=crop&w=1600&q=80",
+        full: "A UI-driven tool that accelerates reinforcement detailing using preset rules and quick selection workflows. Focused on clarity, speed, and consistent output.",
+        tech: "WPF, C#, Tekla Open API",
+        category: "Tekla Open API & Engineering",
+        bullets: [
+          "Preset libraries for bar shapes and attributes",
+          "Fast placement and editing workflows",
+          "Schedule-friendly outputs and checks"
+        ],
+        links: { primary: "#", secondary: "#" }
+      },
+
+      // Web / Application
+      {
+        id: "load-analysis-script",
+        group: "web",
+        tags: ["PYTHON", "AUTOMATION"],
+        title: "Load Analysis Script",
+        short: "Automated load calculation script integrating Excel data directly into analysis models.",
+        image: "https://images.unsplash.com/photo-1515879218367-8466d910aaa4?auto=format&fit=crop&w=1600&q=80",
+        full: "Automation scripts that transform spreadsheet inputs into consistent calculation outputs, reducing manual work and improving repeatability across projects.",
+        tech: "Python, Excel Automation",
+        category: "Web & Application Development",
+        bullets: [
+          "Input validation and error summaries",
+          "Template-driven calculations",
+          "Export to reports (CSV/Excel/PDF-ready)"
+        ],
+        links: { primary: "#", secondary: "#" }
+      },
+      {
+        id: "drawing-generator",
+        group: "web",
+        tags: ["C#", "DRAWINGS"],
+        title: "Drawing Generator",
+        short: "Batch creation of fabrication drawings with intelligent view placement algorithms.",
+        image: "https://images.unsplash.com/photo-1529421306631-5d7c4bcd5325?auto=format&fit=crop&w=1600&q=80",
+        full: "A utility that generates drawings in bulk using preset rules for views, dimensions, and annotations. Helps standardize drawing outputs and reduce drafting time.",
+        tech: "C#, Automation, Drawing Workflows",
+        category: "Web & Application Development",
+        bullets: [
+          "Batch generation + consistent layouts",
+          "Rule-based view placement",
+          "Reduced manual drafting steps"
+        ],
+        links: { primary: "#", secondary: "#" }
+      },
+      {
+        id: "material-optimizer",
+        group: "web",
+        tags: ["ALGORITHM", "OPTIMIZATION"],
+        title: "Material Optimizer",
+        short: "Nesting algorithm implementation to minimize steel waste during fabrication.",
+        image: "https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?auto=format&fit=crop&w=1600&q=80",
+        full: "An optimization tool that proposes cutting/nesting layouts to reduce scrap. Useful for improving material efficiency and cost.",
+        tech: "Algorithms, Optimization, Data Modeling",
+        category: "Web & Application Development",
+        bullets: [
+          "Waste reduction strategies",
+          "Constraint-based layout generation",
+          "Exportable plans and summaries"
+        ],
+        links: { primary: "#", secondary: "#" }
+      }
+    ];
+
+    const gridTekla = document.getElementById("grid-tekla");
+    const gridWeb   = document.getElementById("grid-web");
+
+    // Modal elements
+    const backdrop = document.getElementById("modalBackdrop");
+    const closeBtn = document.getElementById("modalClose");
+    const modalMiniTitle = document.getElementById("modalMiniTitle");
+    const modalImage = document.getElementById("modalImage");
+    const modalTags  = document.getElementById("modalTags");
+    const modalTitle = document.getElementById("modalTitle");
+    const modalDesc  = document.getElementById("modalDesc");
+    const modalTech  = document.getElementById("modalTech");
+    const modalCategory = document.getElementById("modalCategory");
+    const modalBullets  = document.getElementById("modalBullets");
+    const modalPrimaryBtn = document.getElementById("modalPrimaryBtn");
+    const modalSecondaryBtn = document.getElementById("modalSecondaryBtn");
+
+    function makeCard(p){
+      const el = document.createElement("article");
+      el.className = "card";
+      el.tabIndex = 0;
+      el.setAttribute("role","button");
+      el.setAttribute("aria-label", "Open project: " + p.title);
+
+      el.innerHTML = `
+        <div class="thumb">
+          <img src="${p.image}" alt="${p.title} thumbnail" loading="lazy" />
+        </div>
+        <div class="card-body">
+          <div class="tags">
+            ${p.tags.map(t => `<span class="tag ${t === "SQL" || t === "DRAWINGS" ? "gray" : ""}">${t}</span>`).join("")}
+          </div>
+          <h3>${p.title}</h3>
+          <p>${p.short}</p>
+        </div>
+      `;
+
+      el.addEventListener("click", () => openModal(p));
+      el.addEventListener("keydown", (e) => {
+        if(e.key === "Enter" || e.key === " "){
+          e.preventDefault();
+          openModal(p);
+        }
+      });
+
+      return el;
+    }
+
+    function render(){
+      gridTekla.innerHTML = "";
+      gridWeb.innerHTML = "";
+
+      projects.forEach(p => {
+        const card = makeCard(p);
+        if(p.group === "tekla") gridTekla.appendChild(card);
+        else gridWeb.appendChild(card);
+      });
+
+      document.getElementById("year").textContent = new Date().getFullYear();
+    }
+
+    function openModal(p){
+      modalMiniTitle.textContent = p.title;
+      modalImage.src = p.image;
+      modalImage.alt = p.title + " image";
+      modalTags.innerHTML = p.tags.map(t => `<span class="tag ${t === "SQL" || t === "DRAWINGS" ? "gray" : ""}">${t}</span>`).join("");
+      modalTitle.textContent = p.title;
+      modalDesc.textContent = p.full;
+      modalTech.textContent = p.tech;
+      modalCategory.textContent = p.category;
+
+      modalBullets.innerHTML = "";
+      p.bullets.forEach(b => {
+        const li = document.createElement("li");
+        li.textContent = b;
+        modalBullets.appendChild(li);
+      });
+
+      modalPrimaryBtn.onclick = () => window.location.href = p.links.primary || "#";
+      modalSecondaryBtn.onclick = () => window.location.href = p.links.secondary || "#";
+
+      backdrop.classList.add("open");
+      backdrop.setAttribute("aria-hidden", "false");
+      document.body.style.overflow = "hidden";
+    }
+
+    function closeModal(){
+      backdrop.classList.remove("open");
+      backdrop.setAttribute("aria-hidden", "true");
+      document.body.style.overflow = "";
+    }
+
+    closeBtn.addEventListener("click", closeModal);
+    backdrop.addEventListener("click", (e) => {
+      if(e.target === backdrop) closeModal();
+    });
+    window.addEventListener("keydown", (e) => {
+      if(e.key === "Escape" && backdrop.classList.contains("open")) closeModal();
+    });
+
+    // Filter chips (simple behavior: scroll to section + highlight)
+    document.querySelectorAll(".chip[data-filter]").forEach(btn => {
+      btn.addEventListener("click", () => {
+        document.querySelectorAll(".chip[data-filter]").forEach(b => b.classList.remove("primary"));
+        btn.classList.add("primary");
+
+        const f = btn.getAttribute("data-filter");
+        // Simple UX: just scroll to the relevant group
+        if(f === "web"){
+          document.getElementById("grid-web").scrollIntoView({behavior:"smooth", block:"start"});
+        }else{
+          document.getElementById("grid-tekla").scrollIntoView({behavior:"smooth", block:"start"});
+        }
+      });
+    });
+
+    render();
+  </script>
+</body>
+</html>

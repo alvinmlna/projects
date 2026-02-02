@@ -1,0 +1,566 @@
+<div
+  class="export-wrapper"
+  style="
+    width: 1440px;
+    min-height: 812px;
+    position: relative;
+    font-family: var(--font-family-body);
+    background-color: var(--background);
+  "
+>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@100;200;300;400;500;600;700;800;900&family=Geist:wght@100;200;300;400;500;600;700;800;900&family=IBM+Plex+Mono:wght@100;200;300;400;500;600;700&family=IBM+Plex+Sans:wght@100;200;300;400;500;600;700&family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Nunito:wght@200;300;400;500;600;700;800;900&family=PT+Serif:wght@400;700&family=Roboto+Slab:wght@100;200;300;400;500;600;700;800;900&family=Roboto:wght@100;300;400;500;700;900&family=Shantell+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet"
+  />
+  <html>
+    <head>
+      <meta charset="UTF-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <title>Engineering Portfolio</title>
+      <style>
+        * {
+          box-sizing: border-box;
+        }
+
+        .export-wrapper {
+          margin: 0;
+          font-family: var(--font-family-body);
+          background-color: var(--background);
+          color: var(--foreground);
+          -webkit-font-smoothing: antialiased;
+        }
+
+        .container {
+          max-width: 1200px;
+          margin: 0 auto;
+          padding: 0 40px;
+        }
+
+        /* Navigation */
+        .navbar {
+          height: 80px;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          border-bottom: 1px solid var(--border);
+          background: var(--background);
+        }
+
+        .logo {
+          font-size: 20px;
+          font-weight: 700;
+          color: var(--foreground);
+          letter-spacing: -0.5px;
+        }
+
+        .nav-links {
+          display: flex;
+          gap: 32px;
+        }
+
+        .nav-item {
+          font-size: 14px;
+          font-weight: 500;
+          color: var(--muted-foreground);
+          cursor: pointer;
+        }
+
+        .nav-item.active {
+          color: var(--foreground);
+        }
+
+        /* Hero Section */
+        .hero {
+          padding: 120px 0 80px;
+          max-width: 800px;
+        }
+
+        .hero-title {
+          font-size: 48px;
+          font-weight: 700;
+          line-height: 1.1;
+          margin-bottom: 24px;
+          letter-spacing: -1px;
+          color: var(--foreground);
+        }
+
+        .hero-subtitle {
+          font-size: 18px;
+          line-height: 1.6;
+          color: var(--muted-foreground);
+          max-width: 600px;
+        }
+
+        /* Section Header + Category Tabs */
+        .section-header {
+          display: flex;
+          justify-content: space-between;
+          align-items: flex-end;
+          margin-bottom: 24px;
+          padding-top: 40px;
+        }
+
+        .section-title {
+          font-size: 24px;
+          font-weight: 600;
+          color: var(--foreground);
+        }
+
+        .section-subtitle {
+          font-size: 14px;
+          color: var(--muted-foreground);
+          margin-top: 8px;
+        }
+
+        .section-header-left {
+          display: flex;
+          flex-direction: column;
+          gap: 4px;
+        }
+
+        .category-tabs {
+          display: flex;
+          gap: 8px;
+        }
+
+        .category-tab {
+          font-size: 13px;
+          font-weight: 500;
+          padding: 6px 12px;
+          border-radius: var(--radius-xl);
+          background-color: var(--secondary);
+          color: var(--muted-foreground);
+          white-space: nowrap;
+        }
+
+        .category-tab.active {
+          background-color: var(--primary);
+          color: var(--primary-foreground);
+        }
+
+        /* Projects Grid */
+        .projects-section {
+          display: flex;
+          flex-direction: column;
+          gap: 56px;
+          padding-bottom: 120px;
+        }
+
+        .projects-group-header {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          margin-bottom: 24px;
+        }
+
+        .projects-group-title {
+          font-size: 18px;
+          font-weight: 600;
+          color: var(--foreground);
+        }
+
+        .projects-group-label {
+          font-size: 13px;
+          color: var(--muted-foreground);
+        }
+
+        .projects-grid {
+          display: grid;
+          grid-template-columns: repeat(3, 1fr);
+          gap: 24px;
+        }
+
+        .project-card {
+          background: var(--card);
+          border: 1px solid var(--border);
+          border-radius: var(--radius-lg);
+          overflow: hidden;
+          transition:
+            transform 0.2s,
+            box-shadow 0.2s;
+          cursor: pointer;
+        }
+
+        .card-image {
+          height: 200px;
+          width: 100%;
+          background-color: var(--muted);
+          position: relative;
+          overflow: hidden;
+        }
+
+        .card-image img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+        }
+
+        .card-content {
+          padding: 20px;
+        }
+
+        .project-tags {
+          display: flex;
+          gap: 8px;
+          margin-bottom: 10px;
+          flex-wrap: wrap;
+        }
+
+        .tag {
+          font-size: 11px;
+          font-weight: 600;
+          color: var(--primary);
+          background-color: var(--secondary);
+          padding: 4px 10px;
+          border-radius: var(--radius-sm);
+          text-transform: uppercase;
+          letter-spacing: 0.5px;
+        }
+
+        .project-title {
+          font-size: 16px;
+          font-weight: 600;
+          margin-bottom: 6px;
+          color: var(--card-foreground);
+        }
+
+        .project-desc {
+          font-size: 14px;
+          line-height: 1.5;
+          color: var(--muted-foreground);
+        }
+
+        .footer {
+          border-top: 1px solid var(--border);
+          padding: 60px 0;
+          margin-top: auto;
+        }
+
+        .footer-content {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+        }
+
+        .social-links {
+          display: flex;
+          gap: 24px;
+        }
+
+        .social-icon {
+          color: var(--muted-foreground);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+      </style>
+    </head>
+    <body>
+      <div class="container">
+        <nav class="navbar">
+          <div class="logo">ALEXANDER DEV</div>
+          <div class="nav-links">
+            <div class="nav-item active" data-media-type="banani-button">
+              Home
+            </div>
+            <div class="nav-item" data-media-type="banani-button">Projects</div>
+            <div class="nav-item" data-media-type="banani-button">About</div>
+            <div class="nav-item" data-media-type="banani-button">Contact</div>
+          </div>
+        </nav>
+
+        <header class="hero">
+          <div class="hero-title">
+            Building digital tools for modern structural engineering.
+          </div>
+          <div class="hero-subtitle">
+            Specialized in Tekla Open API development, automation scripts, and
+            custom software solutions for the construction industry.
+          </div>
+        </header>
+
+        <section>
+          <div class="section-header">
+            <div class="section-header-left">
+              <div class="section-title">Selected Projects</div>
+              <div class="section-subtitle">
+                Organized by focus area so visitors can quickly see what you
+                build.
+              </div>
+            </div>
+            <div class="category-tabs">
+              <div class="category-tab active" data-media-type="banani-button">
+                Tekla Open API &amp; Engineering
+              </div>
+              <div class="category-tab" data-media-type="banani-button">
+                Web &amp; Application Development
+              </div>
+            </div>
+          </div>
+
+          <div class="projects-section">
+            <!-- Tekla / Engineering Group -->
+            <div>
+              <div class="projects-group-header">
+                <div class="projects-group-title">
+                  Tekla Open API &amp; Engineering Tools
+                </div>
+                <div class="projects-group-label">
+                  Plugins and automations built directly for structural modeling
+                  workflows.
+                </div>
+              </div>
+              <div class="projects-grid">
+                <!-- Card 1 -->
+                <article class="project-card" data-media-type="banani-button">
+                  <div class="card-image">
+                    <img
+                      data-aspect-ratio="4:3"
+                      data-query="blueprint schematic technical drawing minimal blue white"
+                      alt="Tekla Auto-Modeler"
+                      src="https://storage.googleapis.com/banani-generated-images/generated-images/bcdd4098-3886-46d3-8ee1-8297de3e24c0.jpg"
+                    />
+                  </div>
+                  <div class="card-content">
+                    <div class="project-tags">
+                      <span class="tag">Tekla API</span>
+                      <span class="tag">C#</span>
+                    </div>
+                    <h3 class="project-title">Tekla Auto-Modeler</h3>
+                    <p class="project-desc">
+                      Automated modeling plugin reducing repetitive tasks by 40%
+                      for steel connection details.
+                    </p>
+                  </div>
+                </article>
+
+                <!-- Card 2 -->
+                <article class="project-card" data-media-type="banani-button">
+                  <div class="card-image">
+                    <img
+                      data-aspect-ratio="4:3"
+                      data-query="wireframe of structural engineering software interface minimal clean"
+                      alt="BIM Data Bridge"
+                      src="https://storage.googleapis.com/banani-generated-images/generated-images/2de8ff98-9b13-482f-a301-a3125ab96c2c.jpg"
+                    />
+                  </div>
+                  <div class="card-content">
+                    <div class="project-tags">
+                      <span class="tag">API</span>
+                      <span class="tag">SQL</span>
+                    </div>
+                    <h3 class="project-title">BIM Data Bridge</h3>
+                    <p class="project-desc">
+                      Synchronizes Tekla Structures model data with external ERP
+                      systems in real-time.
+                    </p>
+                  </div>
+                </article>
+
+                <!-- Card 3 -->
+                <article class="project-card" data-media-type="banani-button">
+                  <div class="card-image">
+                    <img
+                      data-aspect-ratio="4:3"
+                      data-query="3d geometric shapes abstract construction minimal white grey"
+                      alt="Rebar Detailing Tool"
+                      src="https://storage.googleapis.com/banani-generated-images/generated-images/1281050c-a028-4705-bedb-9b280e1e94bf.jpg"
+                    />
+                  </div>
+                  <div class="card-content">
+                    <div class="project-tags">
+                      <span class="tag">Tekla API</span>
+                      <span class="tag">WPF</span>
+                    </div>
+                    <h3 class="project-title">Rebar Detailing Tool</h3>
+                    <p class="project-desc">
+                      Custom visual interface for complex reinforcement
+                      placement and scheduling.
+                    </p>
+                  </div>
+                </article>
+              </div>
+            </div>
+
+            <!-- Web / App Development Group -->
+            <div>
+              <div class="projects-group-header">
+                <div class="projects-group-title">
+                  Web &amp; Application Development
+                </div>
+                <div class="projects-group-label">
+                  Supporting tools, dashboards, and utilities around your
+                  engineering stack.
+                </div>
+              </div>
+              <div class="projects-grid">
+                <!-- Card 4 -->
+                <article class="project-card" data-media-type="banani-button">
+                  <div class="card-image">
+                    <img
+                      data-aspect-ratio="4:3"
+                      data-query="python code snippet on screen minimal aesthetic"
+                      alt="Load Analysis Script"
+                      src="https://storage.googleapis.com/banani-generated-images/generated-images/24832d6a-5161-43e1-aa94-e4b17c174873.jpg"
+                    />
+                  </div>
+                  <div class="card-content">
+                    <div class="project-tags">
+                      <span class="tag">Python</span>
+                      <span class="tag">Automation</span>
+                    </div>
+                    <h3 class="project-title">Load Analysis Script</h3>
+                    <p class="project-desc">
+                      Automated load calculation script integrating Excel data
+                      directly into analysis models.
+                    </p>
+                  </div>
+                </article>
+
+                <!-- Card 5 -->
+                <article class="project-card" data-media-type="banani-button">
+                  <div class="card-image">
+                    <img
+                      data-aspect-ratio="4:3"
+                      data-query="minimalist architectural sketch lines grey"
+                      alt="Drawing Generator"
+                      src="https://storage.googleapis.com/banani-generated-images/generated-images/55d8fb68-0ae9-4765-89af-8a1248bece49.jpg"
+                    />
+                  </div>
+                  <div class="card-content">
+                    <div class="project-tags">
+                      <span class="tag">C#</span>
+                      <span class="tag">Drawings</span>
+                    </div>
+                    <h3 class="project-title">Drawing Generator</h3>
+                    <p class="project-desc">
+                      Batch creation of fabrication drawings with intelligent
+                      view placement algorithms.
+                    </p>
+                  </div>
+                </article>
+
+                <!-- Card 6 -->
+                <article class="project-card" data-media-type="banani-button">
+                  <div class="card-image">
+                    <img
+                      data-aspect-ratio="4:3"
+                      data-query="abstract network nodes connection minimal light blue"
+                      alt="Material Optimizer"
+                      src="https://storage.googleapis.com/banani-generated-images/generated-images/f53537f6-f2ba-405a-9502-00b8d614c9c2.jpg"
+                    />
+                  </div>
+                  <div class="card-content">
+                    <div class="project-tags">
+                      <span class="tag">Algorithm</span>
+                      <span class="tag">Optimization</span>
+                    </div>
+                    <h3 class="project-title">Material Optimizer</h3>
+                    <p class="project-desc">
+                      Nesting algorithm implementation to minimize steel waste
+                      during fabrication.
+                    </p>
+                  </div>
+                </article>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <footer class="footer">
+          <div class="footer-content">
+            <div style="font-size: 14px; color: var(--muted-foreground)">
+              © 2024 Alexander Dev. All rights reserved.
+            </div>
+            <div class="social-links">
+              <div class="social-icon" data-media-type="banani-button">
+                <div
+                  style="
+                    width: 20px;
+                    height: 20px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                  "
+                >
+                  <iconify-icon
+                    icon="lucide:github"
+                    style="font-size: 20px; color: var(--muted-foreground)"
+                  ></iconify-icon>
+                </div>
+              </div>
+              <div class="social-icon" data-media-type="banani-button">
+                <div
+                  style="
+                    width: 20px;
+                    height: 20px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                  "
+                >
+                  <iconify-icon
+                    icon="lucide:linkedin"
+                    style="font-size: 20px; color: var(--muted-foreground)"
+                  ></iconify-icon>
+                </div>
+              </div>
+              <div class="social-icon" data-media-type="banani-button">
+                <div
+                  style="
+                    width: 20px;
+                    height: 20px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                  "
+                >
+                  <iconify-icon
+                    icon="lucide:mail"
+                    style="font-size: 20px; color: var(--muted-foreground)"
+                  ></iconify-icon>
+                </div>
+              </div>
+            </div>
+          </div>
+        </footer>
+      </div>
+    </body>
+  </html>
+  <script src="https://code.iconify.design/iconify-icon/3.0.0/iconify-icon.min.js"></script>
+  <style>
+    :root {
+      --background: #ffffff;
+      --foreground: #0b1220;
+      --border: #00000014;
+      --input: #f6f8fa;
+      --primary: #2b6be6;
+      --primary-foreground: #ffffff;
+      --secondary: #f1f5f9;
+      --secondary-foreground: #0b1220;
+      --muted: #e9edf2;
+      --muted-foreground: #7a8694;
+      --success: #2fc47a;
+      --success-foreground: #0b1220;
+      --accent: #7da7ff;
+      --accent-foreground: #07203a;
+      --destructive: #e9423a;
+      --destructive-foreground: #ffffff;
+      --warning: #f6c85f;
+      --warning-foreground: #0b1220;
+      --card: #ffffff;
+      --card-foreground: #0b1220;
+      --sidebar: #f8fafc;
+      --sidebar-foreground: #0b1220;
+      --sidebar-primary: #e8f0ff;
+      --sidebar-primary-foreground: #2b6be6;
+      --radius-sm: 4px;
+      --radius-md: 6px;
+      --radius-lg: 8px;
+      --radius-xl: 12px;
+      --font-family-body: Inter;
+    }
+  </style>
+</div>
